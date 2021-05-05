@@ -12,7 +12,6 @@ const DonutChart = () => {
   for (let i = 0; i < rows; i++) {
     let c = expenses[i].category;
     let a = expenses[i].amount;
-    console.log(c);
     if (!categories[c]) {
       categories = { ...categories, [c]: a };
     } else {

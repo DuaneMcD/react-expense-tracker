@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './BoostrapReset.css';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DonutChart from './Components/Donut';
-import ExpTable from './Components/ExpTable';
+import ExpenseTable from './Components/ExpenseTable';
 import InputModal from './Components/InputModal';
 import { ExpenseContext } from './contexts/ExpenseContext';
 
@@ -19,6 +19,15 @@ function App() {
     },
   ]);
 
+  useEffect(() => {
+    const savedExpenses = JSON.parse(localStorage.getItem('expenses') || []);
+    setExpenses(savedExpenses);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+  }, [expenses]);
+
   return (
     <div className='App'>
       <ExpenseContext.Provider value={{ expenses, setExpenses }}>
@@ -32,7 +41,7 @@ function App() {
           New Expense
         </button>
         <InputModal />
-        <ExpTable />
+        <ExpenseTable />
       </ExpenseContext.Provider>
     </div>
   );

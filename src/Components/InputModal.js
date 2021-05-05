@@ -3,7 +3,7 @@ import { ExpenseContext } from '../contexts/ExpenseContext';
 import bootstrap from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function InputModal() {
+const InputModal = () => {
   const { expenses, setExpenses } = useContext(ExpenseContext);
   const [date, setDate] = useState('');
   const [amount, setAmount] = useState(0);
@@ -12,13 +12,45 @@ function InputModal() {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
 
-  const newExpense = {
-    date,
-    amount: parseFloat(amount),
-    vendor,
-    payment,
-    description,
-    category,
+  const checkSubmition = e => {
+    e.preventDefault();
+    return checkEmptyInputs()
+      ? alert(`Unable to Submit! All fields required.`)
+      : handleFormSubmit();
+  };
+
+  const handleFormSubmit = () => {
+    const newExpense = {
+      id: Date.now(),
+      date,
+      amount: formatAmount(amount),
+      vendor,
+      payment,
+      description,
+      category,
+    };
+
+    setExpenses([...expenses, newExpense]);
+    clearFields();
+  };
+
+  const checkEmptyInputs = () => {
+    const emptyInput =
+      !date || !amount || !vendor || !payment || !description || !category;
+    return emptyInput ? true : false;
+  };
+
+  const formatAmount = amount => {
+    return (amount = parseFloat(amount).toFixed(2));
+  };
+
+  const clearFields = () => {
+    setDate('');
+    setAmount(0);
+    setVendor('');
+    setPayment('');
+    setDescription('');
+    setCategory('');
   };
 
   return (
@@ -36,7 +68,7 @@ function InputModal() {
               aria-label='Close'></button>
           </div>
           <div className='modal-body'>
-            <form className='row g-3'>
+            <form className='row g-3' onSubmit={checkSubmition}>
               <div className='mb-3 selectDate col-md-6'>
                 <label htmlFor='inputDate' className='form-label'>
                   Date
@@ -126,28 +158,26 @@ function InputModal() {
                   onChange={event => setDescription(event.target.value)}
                 />
               </div>
+              <button
+                type='button'
+                className='btn btn-secondary'
+                data-bs-dismiss='modal'>
+                Cancel
+              </button>
+              <button
+                type='submit'
+                className='btn btn-primary'
+                data-bs-toggle='modal'
+                data-bs-target='#inputModal'>
+                Save
+              </button>
             </form>
           </div>
-          <div className='modal-footer'>
-            <button
-              type='button'
-              className='btn btn-secondary'
-              data-bs-dismiss='modal'>
-              Cancel
-            </button>
-            <button
-              type='button'
-              className='btn btn-primary'
-              data-bs-toggle='modal'
-              data-bs-target='#inputModal'
-              onClick={() => setExpenses([...expenses, newExpense])}>
-              Save
-            </button>
-          </div>
+          <div className='modal-footer'></div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default InputModal;
