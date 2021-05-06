@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const InputModal = () => {
   const { expenses, setExpenses } = useContext(ExpenseContext);
   const [date, setDate] = useState('');
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState();
   const [vendor, setVendor] = useState('');
   const [payment, setPayment] = useState('');
   const [description, setDescription] = useState('');
@@ -41,12 +41,12 @@ const InputModal = () => {
   };
 
   const formatAmount = amount => {
-    return (amount = parseFloat(amount).toFixed(2));
+    return (amount = +parseFloat(amount).toFixed(2));
   };
 
   const clearFields = () => {
     setDate('');
-    setAmount(0);
+    setAmount('');
     setVendor('');
     setPayment('');
     setDescription('');
@@ -77,6 +77,7 @@ const InputModal = () => {
                   type='date'
                   className='form-control'
                   id='inputDate'
+                  value={date}
                   onChange={event => setDate(event.target.value)}
                 />
               </div>
@@ -91,8 +92,10 @@ const InputModal = () => {
                   step='any'
                   className='form-control'
                   id='inputAmount'
+                  value={amount}
                   placeholder={0.0}
                   onChange={event => setAmount(event.target.value)}
+                  onSubmit={e => setAmount('')}
                 />
               </div>
               <div className='mb-3 paymentSelect col-md-6'>
@@ -103,6 +106,7 @@ const InputModal = () => {
                   className='form-control'
                   list='paymentOptions'
                   id='paymentType'
+                  value={payment}
                   placeholder='Click to search...'
                   onChange={event => setPayment(event.target.value)}
                 />
@@ -122,6 +126,7 @@ const InputModal = () => {
                   className='form-control'
                   list='categoryOptions'
                   id='categorySelect'
+                  value={category}
                   placeholder='Click to search...'
                   onChange={event => setCategory(event.target.value)}
                 />
@@ -141,6 +146,7 @@ const InputModal = () => {
                   type='text'
                   className='form-control'
                   id='inputVendor'
+                  value={vendor}
                   placeholder='place of purchase'
                   onChange={event => setVendor(event.target.value)}
                 />
@@ -154,6 +160,7 @@ const InputModal = () => {
                   type='text'
                   className='form-control'
                   id='inputDescription'
+                  value={description}
                   placeholder='reason for purchase'
                   onChange={event => setDescription(event.target.value)}
                 />

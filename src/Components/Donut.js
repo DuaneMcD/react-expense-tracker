@@ -18,6 +18,8 @@ const DonutChart = () => {
       categories[c] += a;
     }
   }
+  console.log(expenses);
+  console.log(categories);
 
   const labels = [...Object.keys(categories)];
   const data = [...Object.values(categories)];
