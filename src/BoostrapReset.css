@@ -1,11 +1,11 @@
 /* reset boostrap margin/padding */
 
-html,
+/* html,
 body {
   height: 100%;
   margin: 0 auto;
   padding: 0px;
-}
+} */
 
 #navbar {
   margin-bottom: 0;

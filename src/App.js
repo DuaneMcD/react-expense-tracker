@@ -29,7 +29,7 @@ function App() {
   }, [expenses]);
 
   return (
-    <div className='App'>
+    <div className='App position-absolute top-50 start-50 translate-middle'>
       <ExpenseContext.Provider value={{ expenses, setExpenses }}>
         <h1>React TRKR</h1>
         <DonutChart className='chart' />

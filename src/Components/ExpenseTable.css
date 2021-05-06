@@ -18,12 +18,10 @@ button.btn.btn-secondary,
 #inputModal > div > div > div.modal-footer > button.btn.btn-primary {
   font-weight: bold;
 }
-table {
+.table {
   border-collapse: collapse;
-  height: auto;
-  border: 1px solid darkgray;
-  box-shadow: 2px 2px 2px 2px rbga(0, 0, 0, 0.35);
-  min-width: 25vw;
+  /* height: auto; */
+  /* width: 20vw; */
 }
 th {
   font-size: 1.11em;
@@ -46,4 +44,20 @@ tr:hover {
   color: tomato;
   font-weight: bolder;
   text-transform: uppercase;
+}
+@media screen and (max-width: 825px) {
+  th {
+    font-size: 0.9em;
+  }
+  tr {
+    font-size: 0.75em;
+  }
+}
+@media screen and (max-width: 560px) {
+  th {
+    font-size: 0.8em;
+  }
+  tr {
+    font-size: 0.6em;
+  }
 }
