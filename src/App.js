@@ -20,8 +20,10 @@ function App() {
   ]);
 
   useEffect(() => {
-    const savedExpenses = JSON.parse(localStorage.getItem('expenses') || []);
-    setExpenses(savedExpenses);
+    if (localStorage.expenses) {
+      const savedExpenses = JSON.parse(localStorage.getItem('expenses') || []);
+      setExpenses(savedExpenses);
+    }
   }, []);
 
   useEffect(() => {
@@ -37,7 +39,8 @@ function App() {
           type='button'
           className='btn btn-primary'
           data-bs-toggle='modal'
-          data-bs-target='#inputModal'>
+          data-bs-target='#inputModal'
+          data-backdrop='false'>
           New Expense
         </button>
         <InputModal />

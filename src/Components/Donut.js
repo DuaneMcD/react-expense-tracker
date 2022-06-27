@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { ExpenseContext } from '../contexts/ExpenseContext';
-import { Doughnut, defaults } from 'react-chartjs-2';
+import 'chart.js/auto';
+import { Doughnut } from 'react-chartjs-2';
 
-defaults.global.legend.position = 'right';
+// defaults.global.legend.position = 'right';
 
 const DonutChart = () => {
   let categories = {};

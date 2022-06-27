@@ -54,7 +54,11 @@ const InputModal = () => {
   };
 
   return (
-    <div className='modal fade' id='inputModal'>
+    <div
+      className='modal fade'
+      id='inputModal'
+      aria-hidden='true'
+      aria-labelledby='inputModalLabel'>
       <div className='modal-dialog'>
         <div className='modal-content'>
           <div className='modal-header'>
